@@ -1,0 +1,34 @@
+{
+	"records": [
+		{
+			"name": "Vishal",
+			"description": "Chakri not stable",
+			"price": 1,
+			"category_name": "Cat 1"
+		},
+		{
+			"name": "Sagar",
+			"description": "Chakri not stable",
+			"price": 2,
+			"category_name": "Cat 2"
+		},
+		{
+			"name": "Chakri",
+			"description": "Chakri not stable",
+			"price": 3,
+			"category_name": "Cat 3"
+		},
+		{
+			"name": "Jayesh",
+			"description": "Chakri not stable",
+			"price": 4,
+			"category_name": "Cat 4"
+		},
+		{
+			"name": "Manikanta",
+			"description": "Chakri not stable",
+			"price": 5,
+			"category_name": "Cat 5"
+		}
+	]
+}
