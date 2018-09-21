@@ -1,27 +1,36 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
-import Avatar from '@material-ui/core/Avatar';
-import FormControl from '@material-ui/core/FormControl';
-import Button from '@material-ui/core/Button';
+import React from "react";
+import $ from "jquery";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemText from "@material-ui/core/ListItemText";
+import Checkbox from "@material-ui/core/Checkbox";
+import Avatar from "@material-ui/core/Avatar";
+import FormControl from "@material-ui/core/FormControl";
+import Button from "@material-ui/core/Button";
+import Collapse from "@material-ui/core/Collapse";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: "100%",
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
+    backgroundColor: theme.palette.background.paper
+  }
 });
 
 export class Menu extends React.Component {
-  state = {
-    checked: [1],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      checked: []
+    };
+    // This binding is necessary to make `this` work in the callback
+    this.menuClick = this.menuClick.bind(this);
+  }
 
   handleToggle = value => () => {
     const { checked } = this.state;
@@ -35,9 +44,39 @@ export class Menu extends React.Component {
     }
 
     this.setState({
-      checked: newChecked,
+      checked: newChecked
     });
   };
+  state = {
+    open: true
+  };
+
+  handleClick = () => {
+    this.setState(state => ({ open: !state.open }));
+  };
+  menuClick(e) {
+    e.preventDefault();
+    let checkedItems = this.state.checked;
+    console.log(checkedItems);
+    let data = {
+      menu: checkedItems
+    };
+    let url = "http://172.16.4.175:8080/menu";
+
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: data,
+      success: function(data, textStatus, jqXHR) {
+        console.log(data);
+
+        //navigate to dashboard page
+      },
+      error: function() {
+        alert("Fail to call:" + url);
+      }
+    });
+  }
 
   render() {
     const { classes } = this.props;
@@ -45,32 +84,43 @@ export class Menu extends React.Component {
     return (
       <div className="profile-wrapper">
         <h3>Menu</h3>
-        <List>
-          {["Roties", "Dharl Rise", "Papad", "GulabJam"].map(value => (
-            <ListItem key={value} dense button >
-              <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
-              <ListItemText primary={`${value}`} />
-              <ListItemSecondaryAction>
-                <Checkbox
-                  onChange={this.handleToggle(value)}
-                  checked={this.state.checked.indexOf(value) !== -1}
-                />
-              </ListItemSecondaryAction>
-            </ListItem>
-          ))}
-        </List>
-        <FormControl fullWidth> 
-        <Button variant="contained" color="secondary" >
+        <ListItem button onClick={this.handleClick}>
+        <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
+          <ListItemText inset primary="Roties" />
+          {this.state.open ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+          <List>
+            {["Tepla", "Thanduri Roti", "Papad", "GulabJam"].map(value => (
+              <ListItem key={value} dense button>
+                <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
+                <ListItemText primary={`${value}`} />
+                <ListItemSecondaryAction>
+                  <Checkbox
+                    onChange={this.handleToggle(value)}
+                    checked={this.state.checked.indexOf(value) !== -1}
+                  />
+                </ListItemSecondaryAction>
+              </ListItem>
+            ))}
+          </List>
+        </Collapse>
+        <FormControl fullWidth>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={this.menuClick}
+          >
             Confirm Menu
-        </Button>
-        </FormControl> 
+          </Button>
+        </FormControl>
       </div>
     );
   }
 }
 
 Menu.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(Menu);

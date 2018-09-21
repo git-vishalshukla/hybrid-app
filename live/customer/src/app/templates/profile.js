@@ -11,7 +11,7 @@ export default class Profile extends React.Component {
         const { classes } = this.props;
         return (
             <div className="profile-wrapper">
-               <h3>Create Profile</h3>
+               <h3>Update Profile</h3>
                <form  noValidate autoComplete="off">
                  <FormControl fullWidth>
                     <TextField
@@ -55,25 +55,12 @@ export default class Profile extends React.Component {
                     margin="normal"
                     />
                    </FormControl>  
-                   <FormControl fullWidth>  
-                    <TextField
-                    id="password"
-                    label="Password"
-                    type="password"
-                    margin="normal"
-                    />
-                   </FormControl> 
-                   <FormControl fullWidth>  
-                    <TextField
-                    id="confirm-password"
-                    label="Confirm Password"
-                    type="password"
-                    margin="normal"
-                    />
-                   </FormControl>  
                    <FormControl fullWidth> 
+                   <div class="change-password">
+                       <a href="#">Change Password</a>
+                    </div>
                    <Button variant="contained" color="secondary" >
-                        Create Profile
+                        Update Profile
                     </Button>
                     </FormControl> 
             </form>    

@@ -8,10 +8,11 @@ export default class NoMatch extends React.Component {
     render() {
         let location = window.location.pathname;
         return (
-            <div>
-                <h3>
+            <div class="profile-wrapper">
+                 <h3>
                     No match for <code>{location}</code>
                 </h3>
+                <img src="../../../assets/img/404-image.jpg" />
             </div>
         );
     }

@@ -3,7 +3,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Paper from '@material-ui/core/Paper';
-export class Dashboard extends React.Component {
+export default class Dashboard extends React.Component {
     constructor(props) {
         super(props);
     }
