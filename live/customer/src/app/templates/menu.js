@@ -26,13 +26,18 @@ export class Menu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: []
+      checked: [],
+      openRoti: false,
+      openDrink: false,
+      openRice: false,
+      openVegetable: false,
+      openSalad: false
     };
     // This binding is necessary to make `this` work in the callback
     this.menuClick = this.menuClick.bind(this);
   }
 
-  handleToggle = value => () => {
+  handleToggle = value => e => {
     const { checked } = this.state;
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -47,17 +52,28 @@ export class Menu extends React.Component {
       checked: newChecked
     });
   };
-  state = {
-    open: true
-  };
 
-  handleClick = () => {
-    this.setState(state => ({ open: !state.open }));
+  handleClick = e => {
+    let menuItemId = e.currentTarget.id;
+    if (menuItemId == "roti") {
+      this.setState(state => ({ openRoti: !state.openRoti }));
+    }
+    if (menuItemId == "vegetable") {
+      this.setState(state => ({ openVegetable: !state.openVegetable }));
+    }
+    if (menuItemId == "salad") {
+      this.setState(state => ({ openSalad: !state.openSalad }));
+    }
+    if (menuItemId == "rice") {
+      this.setState(state => ({ openRice: !state.openRice }));
+    }
+    if (menuItemId == "drink") {
+      this.setState(state => ({ openDrink: !state.openDrink }));
+    }
   };
   menuClick(e) {
     e.preventDefault();
     let checkedItems = this.state.checked;
-    console.log(checkedItems);
     let data = {
       menu: checkedItems
     };
@@ -68,8 +84,6 @@ export class Menu extends React.Component {
       url: url,
       data: data,
       success: function(data, textStatus, jqXHR) {
-        console.log(data);
-
         //navigate to dashboard page
       },
       error: function() {
@@ -80,18 +94,23 @@ export class Menu extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const rotiItems = ["Thepla", "Tanduri Roti", "Chapati", "Paratha", "Naan"];
+    const drinkItems = ["Chaash", "Coke", "Juice"];
+    const riceItems = ["Rice", "Jira Rice", "Biryani"];
+    const saladItems = ["Papad", "Kobi", "Onion"];
+    const vegetablesItems = ["Potato", "Ladies Finger", "Tomato"];
 
     return (
       <div className="profile-wrapper">
         <h3>Menu</h3>
-        <ListItem button onClick={this.handleClick}>
-        <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
+        <ListItem id="roti" button onClick={this.handleClick}>
+          <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
           <ListItemText inset primary="Roties" />
-          {this.state.open ? <ExpandLess /> : <ExpandMore />}
+          {this.state.openRoti ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-        <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+        <Collapse in={this.state.openRoti} timeout="auto" unmountOnExit>
           <List>
-            {["Tepla", "Thanduri Roti", "Papad", "GulabJam"].map(value => (
+            {rotiItems.map(value => (
               <ListItem key={value} dense button>
                 <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
                 <ListItemText primary={`${value}`} />
@@ -105,6 +124,95 @@ export class Menu extends React.Component {
             ))}
           </List>
         </Collapse>
+
+        <ListItem id="vegetable" button onClick={this.handleClick}>
+          <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
+          <ListItemText inset primary="Vegetables" />
+          {this.state.openVegetable ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={this.state.openVegetable} timeout="auto" unmountOnExit>
+          <List>
+            {vegetablesItems.map(value => (
+              <ListItem key={value} dense button>
+                <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
+                <ListItemText primary={`${value}`} />
+                <ListItemSecondaryAction>
+                  <Checkbox
+                    onChange={this.handleToggle(value)}
+                    checked={this.state.checked.indexOf(value) !== -1}
+                  />
+                </ListItemSecondaryAction>
+              </ListItem>
+            ))}
+          </List>
+        </Collapse>
+
+        <ListItem id="salad" button onClick={this.handleClick}>
+          <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
+          <ListItemText inset primary="Salads" />
+          {this.state.openSalad ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={this.state.openSalad} timeout="auto" unmountOnExit>
+          <List>
+            {saladItems.map(value => (
+              <ListItem key={value} dense button>
+                <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
+                <ListItemText primary={`${value}`} />
+                <ListItemSecondaryAction>
+                  <Checkbox
+                    onChange={this.handleToggle(value)}
+                    checked={this.state.checked.indexOf(value) !== -1}
+                  />
+                </ListItemSecondaryAction>
+              </ListItem>
+            ))}
+          </List>
+        </Collapse>
+
+        <ListItem id="rice" button onClick={this.handleClick}>
+          <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
+          <ListItemText inset primary="Rice" />
+          {this.state.openRice ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={this.state.openRice} timeout="auto" unmountOnExit>
+          <List>
+            {riceItems.map(value => (
+              <ListItem key={value} dense button>
+                <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
+                <ListItemText primary={`${value}`} />
+                <ListItemSecondaryAction>
+                  <Checkbox
+                    onChange={this.handleToggle(value)}
+                    checked={this.state.checked.indexOf(value) !== -1}
+                  />
+                </ListItemSecondaryAction>
+              </ListItem>
+            ))}
+          </List>
+        </Collapse>
+
+        <ListItem id="drink" button onClick={this.handleClick}>
+          <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
+          <ListItemText inset primary="Drinks" />
+          {this.state.openDrink ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={this.state.openDrink} timeout="auto" unmountOnExit>
+          <List>
+            {drinkItems.map(value => (
+              <ListItem key={value} dense button>
+                <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
+                <ListItemText primary={`${value}`} />
+                <ListItemSecondaryAction>
+                  <Checkbox 
+                    onChange={this.handleToggle(value)}
+                    checked={this.state.checked.indexOf(value) !== -1}
+                  />
+                </ListItemSecondaryAction>
+              </ListItem>
+            ))}
+          </List>
+        </Collapse>
+
         <FormControl fullWidth>
           <Button
             variant="contained"

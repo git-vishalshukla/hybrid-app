@@ -3,10 +3,6 @@ import { Label } from '../atoms/label';
 import { Input } from '../atoms/input';
 
 export class FormGroup extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div class="form-group">

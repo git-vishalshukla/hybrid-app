@@ -3,9 +3,6 @@ import { FormGroup } from '../molecules/form-group';
 import { Button } from '../atoms/button';
 
 export class Form extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (
