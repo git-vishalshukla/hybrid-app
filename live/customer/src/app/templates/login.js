@@ -22,14 +22,12 @@ export default class Login extends React.Component {
         let password = $("#password").val();
 
         let data = {
-            "email": email,//user@user.com
-            "password": password//123456
+            "email": email,
+            "password": password
         }
         let url = "http://172.16.4.173:8080/api/v1/auth/login";
         let self = this;
-        self.setState({
-            isLoggedIn: true
-        });
+        
         $.ajax({
             type: "POST",
             url: url,
@@ -44,7 +42,6 @@ export default class Login extends React.Component {
             error: function () {
                 alert("Fail to call:" + url);
             }
-
         });
     }
 

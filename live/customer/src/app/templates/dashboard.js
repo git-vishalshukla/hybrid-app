@@ -12,12 +12,15 @@ export default class Dashboard extends React.Component {
         this.state = {
             toProfile: false,
             toService: false,
+            toMenu: false,
             profileData: [],
-            serviceData: []
+            serviceData: [],
+            menuData: [],
         };
         // This binding is necessary to make `this` work in the callback
         this.profileClick = this.profileClick.bind(this);
         this.serviceClick = this.serviceClick.bind(this);
+        this.menuClick = this.menuClick.bind(this);
     }
 
     profileClick(e) {
@@ -44,10 +47,6 @@ export default class Dashboard extends React.Component {
 
     serviceClick(e) {
         e.preventDefault();
-
-        this.setState({
-            toService: true
-        });
         let url = "http://172.16.4.173:8080/api/v1/get-service";
         let self = this;
         $.ajax({
@@ -68,6 +67,29 @@ export default class Dashboard extends React.Component {
         });
     }
 
+    menuClick(e) {
+        e.preventDefault();
+        let url = "http://172.16.4.173:8080/api/v1/get-menu";
+        let self = this;
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            headers: {
+                "Authorization": "Bearer" + localStorage.getItem("token")
+            },
+            success: function (data, textStatus, jqXHR) {
+                self.setState({
+                    toMenu: true,
+                    menuData: data.data.returnObj
+                });
+            },
+            error: function () {
+                alert("Fail to call:" + url);
+            }
+        });
+    }
+
     render() {
         const toProfile = this.state.toProfile;
         const toService = this.state.toService;
@@ -77,11 +99,11 @@ export default class Dashboard extends React.Component {
             return (
                 <Profile returnObj={profileData} />
             );
-        }else if (toService) {
+        } else if (toService) {
             return (
                 <Service returnObj={serviceData} />
             );
-        }else {
+        } else {
             return (
                 <div className="dash-container">
                     <Grid container direction="row" spacing={0}>
@@ -123,7 +145,7 @@ export default class Dashboard extends React.Component {
                         </Grid>
                         <Grid item xs={6}>
                             <ButtonBase className="full-width">
-                                <div className="dash-grid">
+                                <div className="dash-grid" onClick={this.menuClick}>
                                     <div className="dash-icon">
                                         <img src="../../../assets/img/junk-food.svg" />
                                     </div>
