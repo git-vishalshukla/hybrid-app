@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
+import { CONFIGURATION } from './config';
 
 const styles = theme => ({
   root: {
@@ -52,18 +53,19 @@ class Service extends React.Component {
       menu: checkedItems
     };
     let url = "http://172.16.4.175:8080/service";
-
-    $.ajax({
-      type: "POST",
-      url: url,
-      data: data,
-      success: function (data, textStatus, jqXHR) {
-        //navigate to dashboard page
-      },
-      error: function () {
-        alert("Fail to call:" + url);
-      }
-    });
+    if (!CONFIGURATION.MOCKAPI) {
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        success: function (data, textStatus, jqXHR) {
+          //navigate to dashboard page
+        },
+        error: function () {
+          alert("Fail to call:" + url);
+        }
+      });
+    } 
   }
 
   render() {

@@ -65,7 +65,6 @@ export default class Login extends React.Component {
                                 <TextField
                                     id="email"
                                     label="Email"
-                                    value=""
                                     margin="normal"
                                 />
                             </FormControl>
@@ -73,7 +72,6 @@ export default class Login extends React.Component {
                                 <TextField
                                     id="password"
                                     label="Password"
-                                    value=""
                                     margin="normal"
                                     type="password"
                                 />
@@ -81,7 +79,7 @@ export default class Login extends React.Component {
                             <FormControl fullWidth>
                                 <Button variant="contained" color="secondary" onClick={this.signinClick}>
                                     Login
-                     </Button>
+                                </Button>
                             </FormControl>
 
                         </div>
@@ -89,7 +87,7 @@ export default class Login extends React.Component {
                     <FormControl fullWidth>
                         <Button variant="contained" color="inherit" >
                             Become Partner
-                 </Button>
+                        </Button>
                     </FormControl>
                 </div>
             );
