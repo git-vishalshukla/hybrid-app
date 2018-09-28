@@ -5,6 +5,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import Dashboard from './dashboard';
 import { Route } from "react-router-dom";
+import {CONFIGURATION} from './config';
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -27,22 +28,27 @@ export default class Login extends React.Component {
         }
         let url = "http://172.16.4.173:8080/api/v1/auth/login";
         let self = this;
-        
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: data,
-            success: function (data, textStatus, jqXHR) {
-                self.setState({
-                    isLoggedIn: true
-                });
-                localStorage.setItem("token", data.token);
-                //navigate to dashboard page
-            },
-            error: function () {
-                alert("Fail to call:" + url);
-            }
-        });
+        if(!CONFIGURATION.MOCKAPI){
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+                    self.setState({
+                        isLoggedIn: true
+                    });
+                    localStorage.setItem("token", data.token);
+                    //navigate to dashboard page
+                },
+                error: function () {
+                    alert("Fail to call:" + url);
+                }
+            });
+        }else{
+            self.setState({
+                isLoggedIn: true
+            });
+        }
     }
 
     render() {

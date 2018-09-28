@@ -13,6 +13,7 @@ import Button from "@material-ui/core/Button";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
+import { CONFIGURATION } from './config';
 
 const styles = theme => ({
   root: {
@@ -78,18 +79,19 @@ export class Menu extends React.Component {
       menu: checkedItems
     };
     let url = "http://172.16.4.175:8080/menu";
-
-    $.ajax({
-      type: "POST",
-      url: url,
-      data: data,
-      success: function(data, textStatus, jqXHR) {
-        //navigate to dashboard page
-      },
-      error: function() {
-        alert("Fail to call:" + url);
-      }
-    });
+    if (!CONFIGURATION.MOCKAPI) {
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        success: function (data, textStatus, jqXHR) {
+          //navigate to dashboard page
+        },
+        error: function () {
+          alert("Fail to call:" + url);
+        }
+      });
+    }
   }
 
   render() {
@@ -203,7 +205,7 @@ export class Menu extends React.Component {
                 <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
                 <ListItemText primary={`${value}`} />
                 <ListItemSecondaryAction>
-                  <Checkbox 
+                  <Checkbox
                     onChange={this.handleToggle(value)}
                     checked={this.state.checked.indexOf(value) !== -1}
                   />
