@@ -1,0 +1,37 @@
+=> Register
+-- name/service name
+-- phoneno
+-- password
+-- B forgot password -- mobile OTP
+-- B login
+
+=> Forgot Password
+
+-- email address/phone
+-- (otp)
+-- new passsword
+-- old password
+-- B confirm
+
+=> Login
+-- phone
+-- password
+-- B login
+
+=> Profile
+-- name/service name
+-- phoneno
+-- password -- change password
+-- email address
+-- address
+-- zip
+-- delivery range
+
+=> About services
+-- C breakfast,lunch,dinner
+-- details of breakfast,lunch & dinner
+-- price of breakfast,lunch & dinner
+
+=> Daily menu
+-- today's menu, lunch, dinner, breakfast
+-- past list -- datewise
