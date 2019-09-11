@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { CONSTANTS } from './constants.js';
 
 import { BrowserRouter as Router, Redirect, Switch, Route, Link } from "react-router-dom";
 

@@ -106,7 +106,7 @@ export class Menu extends React.Component {
       <div className="profile-wrapper">
         <h3>Menu</h3>
         <ListItem id="roti" button onClick={this.handleClick}>
-          <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
+          <Avatar alt="Remy Sharp" src="./assets/img/thepla.jpeg" />
           <ListItemText inset primary="Roties" />
           {this.state.openRoti ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
@@ -114,7 +114,7 @@ export class Menu extends React.Component {
           <List>
             {rotiItems.map(value => (
               <ListItem key={value} dense button>
-                <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
+                <Avatar alt="Remy Sharp" src="./assets/img/thepla.jpeg" />
                 <ListItemText primary={`${value}`} />
                 <ListItemSecondaryAction>
                   <Checkbox
@@ -128,7 +128,7 @@ export class Menu extends React.Component {
         </Collapse>
 
         <ListItem id="vegetable" button onClick={this.handleClick}>
-          <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
+          <Avatar alt="Remy Sharp" src="./assets/img/thepla.jpeg" />
           <ListItemText inset primary="Vegetables" />
           {this.state.openVegetable ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
@@ -150,7 +150,7 @@ export class Menu extends React.Component {
         </Collapse>
 
         <ListItem id="salad" button onClick={this.handleClick}>
-          <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
+          <Avatar alt="Remy Sharp" src="./assets/img/thepla.jpeg" />
           <ListItemText inset primary="Salads" />
           {this.state.openSalad ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
@@ -158,7 +158,7 @@ export class Menu extends React.Component {
           <List>
             {saladItems.map(value => (
               <ListItem key={value} dense button>
-                <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
+                <Avatar alt="Remy Sharp" src="./assets/img/thepla.jpeg" />
                 <ListItemText primary={`${value}`} />
                 <ListItemSecondaryAction>
                   <Checkbox
@@ -172,7 +172,7 @@ export class Menu extends React.Component {
         </Collapse>
 
         <ListItem id="rice" button onClick={this.handleClick}>
-          <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
+          <Avatar alt="Remy Sharp" src="./assets/img/thepla.jpeg" />
           <ListItemText inset primary="Rice" />
           {this.state.openRice ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
@@ -180,7 +180,7 @@ export class Menu extends React.Component {
           <List>
             {riceItems.map(value => (
               <ListItem key={value} dense button>
-                <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
+                <Avatar alt="Remy Sharp" src="./assets/img/thepla.jpeg" />
                 <ListItemText primary={`${value}`} />
                 <ListItemSecondaryAction>
                   <Checkbox
@@ -194,7 +194,7 @@ export class Menu extends React.Component {
         </Collapse>
 
         <ListItem id="drink" button onClick={this.handleClick}>
-          <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
+          <Avatar alt="Remy Sharp" src="./assets/img/thepla.jpeg" />
           <ListItemText inset primary="Drinks" />
           {this.state.openDrink ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
@@ -202,7 +202,7 @@ export class Menu extends React.Component {
           <List>
             {drinkItems.map(value => (
               <ListItem key={value} dense button>
-                <Avatar alt="Remy Sharp" src="../../assets/img/thepla.jpeg" />
+                <Avatar alt="Remy Sharp" src="./assets/img/thepla.jpeg" />
                 <ListItemText primary={`${value}`} />
                 <ListItemSecondaryAction>
                   <Checkbox

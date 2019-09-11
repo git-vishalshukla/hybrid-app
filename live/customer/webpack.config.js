@@ -13,47 +13,37 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",
+    }),
+    new HtmlWebpackPlugin({
+         inject: false,
+         template: `public/index.html`
     })
   ],
   optimization: {
     minimize: true,
   },
+  // performance: {
+  //  hints: false,
+  //  maxEntrypointSize: 512000,
+  //  maxAssetSize: 512000
+  // },
   module: {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|config\.js$|manifest\.json$)/,
-        loader: "babel-loader",
-        query: {
-          presets: ['es2016'],
-        },
+        exclude: /(node_modules|\.json$)/,
+        loader: "babel-loader"
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif|ico)$/,
+        exclude: /node_modules/,
+        use: ['file-loader?name=[name].[ext]']
       },
       {
         test: /\.css$/,
+        exclude: /node_modules/,
         use: ['style-loader', 'css-loader']
-      },
-      {
-        test: /\.(png|jpg|svg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options:{
-              name: '[name].[ext]',
-              outputPath: 'assets/img/'
-            }
-          }
-        ]
-      },
+      }
     ],
-  },
-  "devServer": {
-    contentBase: `${__dirname}/public/`, //path.join(__dirname, "public/"),
-    inline: true,
-    host: '0.0.0.0',
-    port: 8080,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      "Access-Control-Allow-Methods" : "*"
-    }
   }
 };
