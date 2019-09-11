@@ -13,6 +13,10 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",
+    }),
+    new HtmlWebpackPlugin({
+         template: `${__dirname}/public/index.html`,
+         favicon: `${__dirname}/public/favicon.ico`
     })
   ],
   optimization: {
@@ -22,38 +26,26 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|config\.js$|manifest\.json$)/,
-        loader: "babel-loader",
-        query: {
-          presets: ['es2016'],
-        },
+        exclude: /(node_modules|manifest\.json$)/,
+        loader: "babel-loader"
       },
       {
         test: /\.css$/,
+        exclude: /node_modules/,
         use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.(png|jpg|svg|gif)$/,
+        test: /\.(png|jpg|svg|ico|gif)$/,
         use: [
           {
             loader: 'file-loader',
             options:{
               name: '[name].[ext]',
-              outputPath: 'assets/img/'
+              outputPath: `${__dirname}/public/assets/img/`
             }
           }
         ]
       },
     ],
-  },
-  "devServer": {
-    contentBase: `${__dirname}/public/`, //path.join(__dirname, "public/"),
-    inline: true,
-    host: '0.0.0.0',
-    port: 8080,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      "Access-Control-Allow-Methods" : "*"
-    }
   }
 };
