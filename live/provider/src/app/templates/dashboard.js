@@ -135,7 +135,7 @@ export default class Dashboard extends React.Component {
                             <ButtonBase className="full-width">
                                 <div className="dash-grid">
                                     <div className="dash-icon">
-                                        <img src="public/assets/img/tray.svg" />
+                                        <img src="./assets/img/tray.svg" />
                                     </div>
                                     <div className="dash-title">
                                         Orders
@@ -147,7 +147,7 @@ export default class Dashboard extends React.Component {
                             <ButtonBase className="full-width">
                                 <div className="dash-grid" onClick={this.profileClick}>
                                     <div className="dash-icon">
-                                        <img src="public/assets/img/settings.svg" />
+                                        <img src="./assets/img/settings.svg" />
                                     </div>
                                     <div className="dash-title">
                                         Profile
@@ -159,7 +159,7 @@ export default class Dashboard extends React.Component {
                             <ButtonBase className="full-width">
                                 <div className="dash-grid" onClick={this.serviceClick}>
                                     <div className="dash-icon">
-                                        <img src="public/assets/img/waiter.svg" />
+                                        <img src="./assets/img/waiter.svg" />
                                     </div>
                                     <div className="dash-title">
                                         Services
@@ -171,7 +171,7 @@ export default class Dashboard extends React.Component {
                             <ButtonBase className="full-width">
                                 <div className="dash-grid" onClick={this.menuClick}>
                                     <div className="dash-icon">
-                                        <img src="public/assets/img/junk-food.svg" />
+                                        <img src="./assets/img/junk-food.svg" />
                                     </div>
                                     <div className="dash-title">
                                         Menu

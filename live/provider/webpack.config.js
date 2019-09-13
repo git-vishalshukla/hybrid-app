@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -13,10 +12,6 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",
-    }),
-    new HtmlWebpackPlugin({
-         inject: false,
-         template: `public/index.html`
     })
   ],
   optimization: {
@@ -31,19 +26,32 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|\.json$)/,
+        exclude: /(node_modules|config\.js$|manifest\.json$)/,
         loader: "babel-loader"
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif|ico)$/,
         exclude: /node_modules/,
-        use: ['file-loader?name=[name].[ext]']
+        use: [
+          {
+            loader: 'file-loader?name=[name].[ext]',
+            options:{
+              outputPath: 'assets/img/'
+            }
+          }
+        ]
       },
       {
         test: /\.css$/,
         exclude: /node_modules/,
         use: ['style-loader', 'css-loader']
       }
-    ],
+    ]
+  },
+  devServer: {
+    contentBase: `${__dirname}/public/`,
+    inline: true,
+    host: 'localhost',
+    port: 8080
   }
 };
