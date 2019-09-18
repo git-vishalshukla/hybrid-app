@@ -6,8 +6,10 @@ import Button from '@material-ui/core/Button';
 import Dashboard from './dashboard';
 import { Route } from "react-router-dom";
 import {CONFIGURATION} from './config';
+import { connect } from "react-redux";
+import { configState } from "../../actions/config";
 
-export default class Login extends React.Component {
+class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,6 +17,7 @@ export default class Login extends React.Component {
         };
         // This binding is necessary to make `this` work in the callback
         this.signinClick = this.signinClick.bind(this);
+        console.log(this.props.configState.img_url);
     }
 
     signinClick(e) {
@@ -96,4 +99,13 @@ export default class Login extends React.Component {
     }
 }
 
+const mapStateToProps = state => ({
+  ...state
+});
 
+const mapDispatchToProps = dispatch => ({
+  configState: () => dispatch(configState),
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
