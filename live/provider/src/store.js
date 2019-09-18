@@ -1,8 +1,14 @@
-import { createStore } from "redux";
-import rotateReducer from "./reducers/rotateReducer";
+import {createStore, combineReducers, applyMiddleware} from 'redux';
+import {createLogger} from 'redux-logger';
+import thunk from "redux-thunk";
+import promise from "redux-promise-middleware";
 
-function store(state = {} ) {
-  return createStore(rotateReducer,state);
-}
+import user from "./reducers/reducer";
 
-export default store;
+const logger = createLogger({});
+
+export default createStore(
+	combineReducers({user}),
+	{},
+	applyMiddleware(logger, thunk, promise())
+);

@@ -6,8 +6,10 @@ import Button from '@material-ui/core/Button';
 import Dashboard from './dashboard';
 import { Route } from "react-router-dom";
 import {CONFIGURATION} from './config';
+
+/***** Redux *****/
 import { connect } from "react-redux";
-import { configState } from "../../actions/config";
+import { setName } from "../../actions/user";
 
 class Login extends React.Component {
     constructor(props) {
@@ -17,8 +19,11 @@ class Login extends React.Component {
         };
         // This binding is necessary to make `this` work in the callback
         this.signinClick = this.signinClick.bind(this);
-        console.log(this.props.configState.img_url);
     }
+	componentWillMount() {
+		this.props.setName("Jayesh");
+		console.log(this.props.user);
+	}
 
     signinClick(e) {
         e.preventDefault();
@@ -60,7 +65,7 @@ class Login extends React.Component {
             return <Route path='/' render={(props) => <Dashboard {...props} isAuthed={true} />} />
         } else {
             return (
-                <div className="profile-wrapper">
+                <div className="profile-wrapper ">
                     <h3>Login</h3>
                     <form className="form-wrapper">
                         <div className="text-center mb-4">
@@ -99,13 +104,19 @@ class Login extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
-  ...state
-});
+const mapStateToProps = state => {
+  return {
+	  user : state.user
+  }
+};
 
-const mapDispatchToProps = dispatch => ({
-  configState: () => dispatch(configState),
-});
+const mapDispatchToProps = dispatch => {
+  return {
+	setName: (name) => {
+		dispatch(setName(name))
+	}
+  }
+};
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
