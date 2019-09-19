@@ -9,21 +9,13 @@ import {CONFIGURATION} from './config';
 
 /***** Redux *****/
 import { connect } from "react-redux";
-import { setName } from "../../actions/user";
+import { setLoggin, setUser } from "../../actions";
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isLoggedIn: false
-        };
-        // This binding is necessary to make `this` work in the callback
         this.signinClick = this.signinClick.bind(this);
     }
-	componentWillMount() {
-		this.props.setName("Jayesh");
-		console.log(this.props.user);
-	}
 
     signinClick(e) {
         e.preventDefault();
@@ -42,9 +34,7 @@ class Login extends React.Component {
                 url: url,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
-                    self.setState({
-                        isLoggedIn: true
-                    });
+					this.props.setLogin(true);
                     localStorage.setItem("token", data.token);
                     //navigate to dashboard page
                 },
@@ -53,14 +43,13 @@ class Login extends React.Component {
                 }
             });
         }else{
-            self.setState({
-                isLoggedIn: true
-            });
+			this.props.setLogin(true);
+			this.props.setUserName("Jayesh Naghera");
         }
     }
 
     render() {
-        const isLoggedIn = this.state.isLoggedIn;
+        const isLoggedIn = this.props.configState.isLoggedIn;
         if (isLoggedIn) {
             return <Route path='/' render={(props) => <Dashboard {...props} isAuthed={true} />} />
         } else {
@@ -106,17 +95,15 @@ class Login extends React.Component {
 
 const mapStateToProps = state => {
   return {
-	  user : state.user
+	  ...state
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-	setName: (name) => {
-		dispatch(setName(name))
-	}
+	setLogin: (value) => dispatch(setLoggin(value)),
+	setUserName: (value) =>	dispatch(setUser(value))
   }
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
