@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 
+
 module.exports = {
   entry: {
     index: './src/index.js'
@@ -26,12 +27,12 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|config\.js$|manifest\.json$)/,
+        exclude: `${__dirname}/node_modules/`,
         loader: "babel-loader"
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif|ico)$/,
-        exclude: /node_modules/,
+        exclude: `${__dirname}/node_modules/`,
         use: [
           {
             loader: 'file-loader?name=[name].[ext]',
@@ -43,7 +44,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: /node_modules/,
+        exclude: `${__dirname}/node_modules/`,
         use: ['style-loader', 'css-loader']
       }
     ]

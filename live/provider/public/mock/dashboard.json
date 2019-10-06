@@ -1,0 +1,18 @@
+{
+	"status": 2,
+	"message": "Get Successfully",
+	"data": [
+		{
+			"id": "order",
+			"name": "Order"
+		},
+		{
+			"id": "service",
+			"name": "Service"
+		},
+		{
+			"id": "manu",
+			"name": "Menu"
+		}
+	]
+}

@@ -3,9 +3,12 @@ import $ from 'jquery';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
-import Dashboard from './dashboard';
+import PersistentDrawerLeft from './include/persistentDrawerLeft.js';
 import { Route } from "react-router-dom";
 import {CONFIGURATION} from './config';
+
+
+
 
 /***** Redux *****/
 import { connect } from "react-redux";
@@ -51,7 +54,7 @@ class Login extends React.Component {
     render() {
         const isLoggedIn = this.props.configState.isLoggedIn;
         if (isLoggedIn) {
-            return <Route path='/' render={(props) => <Dashboard {...props} isAuthed={true} />} />
+            return <Route path='/' render={(props) => <PersistentDrawerLeft {...props} isAuthed={true} />} />
         } else {
             return (
                 <div className="profile-wrapper ">
